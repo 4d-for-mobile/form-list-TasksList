@@ -115,7 +115,7 @@ class ___TABLE___ListForm: ListForm___LISTFORMTYPE___ {
         let textFieldInsideUISearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideUISearchBar?.textColor = blueColor
         textFieldInsideUISearchBar?.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
-        
+
         // SearchBar placeholder style
         let textFieldInsideUISearchBarLabel = textFieldInsideUISearchBar!.value(forKey: "placeholderLabel") as? UILabel
         textFieldInsideUISearchBarLabel?.textColor = blueColor
