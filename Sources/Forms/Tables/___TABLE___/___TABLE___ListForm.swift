@@ -8,7 +8,7 @@
 import UIKit
 import QMobileUI
 
-/// Generated list form for ___TABLE___ table.
+/// A progress bar.
 @IBDesignable
 class ___TABLE___CustomProgressBarList: UIView {
 
@@ -36,13 +36,12 @@ class ___TABLE___CustomProgressBarList: UIView {
             }
             percent = (CGFloat(number.doubleValue)) / 100
             setNeedsDisplay()
-
         }
     }
 
     override func draw(_ rect: CGRect) {
-        let X = self.bounds.midX
-        let Y = self.bounds.midY
+        let x = self.bounds.midX // swiftlint:disable:this identifier_name
+        let y = self.bounds.midY // swiftlint:disable:this identifier_name
         var strokeStart: CGFloat = 0
         var strokeEnd: CGFloat = percent
         let degrees = 270.0
@@ -61,13 +60,39 @@ class ___TABLE___CustomProgressBarList: UIView {
             let radians = CGFloat(degrees * Double.pi / 180)
             layer.transform = CATransform3DMakeRotation(radians, 0.0, 0.0, 1.0)
         }
-        let path = UIBezierPath(ovalIn: CGRect(x: (X - (68/2)), y: (Y - (68/2)), width: 68, height: 68)).cgPath
-        self.addOval(self.bgThickness, path: path, strokeStart: strokeStart, strokeEnd: 1.0, strokeColor: self.bgColor, fillColor: UIColor.clear, shadowRadius: 0, shadowOpacity: 0, shadowOffsset: CGSize.zero)
-        self.addOval2(self.thickness, path: path, strokeStart: strokeStart, strokeEnd: strokeEnd, strokeColor: self.barColor, fillColor: UIColor.clear, shadowRadius: 0, shadowOpacity: 0, shadowOffsset: CGSize.zero)
+        let ovalSize: CGFloat = 68.0
+        let ovalRect = CGRect(x: x - (ovalSize/2), y: y - (ovalSize/2), width: ovalSize, height: ovalSize)
+        let path = UIBezierPath(ovalIn: ovalRect).cgPath
+        self.addOval(self.bgThickness,
+                     path: path,
+                     strokeStart: strokeStart,
+                     strokeEnd: 1.0,
+                     strokeColor: self.bgColor,
+                     fillColor: .clear,
+                     shadowRadius: 0,
+                     shadowOpacity: 0,
+                     shadowOffsset: .zero)
+        self.addOval2(self.thickness,
+                      path: path,
+                      strokeStart: strokeStart,
+                      strokeEnd: strokeEnd,
+                      strokeColor: self.barColor,
+                      fillColor: .clear,
+                      shadowRadius: 0,
+                      shadowOpacity: 0,
+                      shadowOffsset: .zero)
     }
 
     // swiftlint:disable:next function_parameter_count
-    func addOval(_ lineWidth: CGFloat, path: CGPath, strokeStart: CGFloat, strokeEnd: CGFloat, strokeColor: UIColor, fillColor: UIColor, shadowRadius: CGFloat, shadowOpacity: Float, shadowOffsset: CGSize) {
+    func addOval(_ lineWidth: CGFloat,
+                 path: CGPath,
+                 strokeStart: CGFloat,
+                 strokeEnd: CGFloat,
+                 strokeColor: UIColor,
+                 fillColor: UIColor,
+                 shadowRadius: CGFloat,
+                 shadowOpacity: Float,
+                 shadowOffsset: CGSize) {
         arc.lineWidth = lineWidth
         arc.path = path
         arc.strokeStart = strokeStart
@@ -84,7 +109,15 @@ class ___TABLE___CustomProgressBarList: UIView {
     }
 
     // swiftlint:disable:next function_parameter_count
-    func addOval2(_ lineWidth: CGFloat, path: CGPath, strokeStart: CGFloat, strokeEnd: CGFloat, strokeColor: UIColor, fillColor: UIColor, shadowRadius: CGFloat, shadowOpacity: Float, shadowOffsset: CGSize) {
+    func addOval2(_ lineWidth: CGFloat,
+                  path: CGPath,
+                  strokeStart: CGFloat,
+                  strokeEnd: CGFloat,
+                  strokeColor: UIColor,
+                  fillColor: UIColor,
+                  shadowRadius: CGFloat,
+                  shadowOpacity: Float,
+                  shadowOffsset: CGSize) {
         arc2.lineWidth = lineWidth
         arc2.path = path
         arc2.strokeStart = strokeStart
@@ -100,6 +133,7 @@ class ___TABLE___CustomProgressBarList: UIView {
     }
 }
 
+/// Generated list form for ___TABLE___ table.
 class ___TABLE___ListForm: ListForm___LISTFORMTYPE___ {
 
     // Do not edit name or override tableName
@@ -110,18 +144,6 @@ class ___TABLE___ListForm: ListForm___LISTFORMTYPE___ {
     // MARK: Events
     override func onLoad() {
         // Do any additional setup after loading the view.
-        // SearchBar text style
-        let blueColor = UIColor(red: 89/255, green: 77/255, blue: 148/255, alpha: 1.0)
-        let textFieldInsideUISearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideUISearchBar?.textColor = blueColor
-        textFieldInsideUISearchBar?.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
-
-        // SearchBar placeholder style
-        let textFieldInsideUISearchBarLabel = textFieldInsideUISearchBar!.value(forKey: "placeholderLabel") as? UILabel
-        textFieldInsideUISearchBarLabel?.textColor = blueColor
-        textFieldInsideUISearchBarLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
-        self.refreshControl?.tintColor = blueColor
-        searchBar.placeholder = "Search by task name"
     }
 
     override func onWillAppear(_ animated: Bool) {
@@ -139,5 +161,4 @@ class ___TABLE___ListForm: ListForm___LISTFORMTYPE___ {
     override func onDidDisappear(_ animated: Bool) {
         // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
     }
-
 }
